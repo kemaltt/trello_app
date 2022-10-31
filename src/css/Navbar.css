@@ -1,0 +1,54 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh 2%;
+    position: sticky;
+    top: 0;
+    background: #fff;
+
+
+}
+
+.nav_items1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: gray;
+    padding: 10px;
+    font-size: 1.1rem;
+}
+
+.nav_items1 ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav_items_auth {
+    display: flex;
+    gap: 10px;
+
+}
+
+
+
+.nav_items_auth a:nth-of-type(2) {
+    background-color: #0e76ec;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}

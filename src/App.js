@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={isLogin ? <Home /> : <Login />} />
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login setIsLogin={setIsLogin} />} />
           <Route path='/register' element={<Register />} />
         </Routes>
