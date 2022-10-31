@@ -28,7 +28,6 @@ export default function Home({ isLogin, setIsLogin }) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
               />
 
               <Button
