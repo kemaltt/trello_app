@@ -18,18 +18,8 @@ export default function Home({ isLogin, setIsLogin }) {
           <p>
             Trello keeps everything in the same place-even if your team isn’t.
           </p>
-          <div className="input">
-            <Box
-              component="form"
-              // onSubmit={handleSubmit}
-              noValidate
-              sx={{
-                mt: 1,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+          <div>
+            <Box component="form" noValidate className="main_input">
               <TextField
                 margin="normal"
                 required
@@ -45,7 +35,7 @@ export default function Home({ isLogin, setIsLogin }) {
                 onClick={() => navigate('/register')}
                 fullWidth
                 variant="contained"
-                sx={{ mt: 1, ml: 2, padding: '15px', width: '300px' }}
+                className="btn"
               >
                 Sign up - it' is free
               </Button>
@@ -54,7 +44,7 @@ export default function Home({ isLogin, setIsLogin }) {
         </section>
         <section>
           <img
-            src="https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=739&q=80"
             alt=""
           />
         </section>
