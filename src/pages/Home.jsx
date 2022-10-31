@@ -5,11 +5,11 @@ import Box from '@mui/material/Box'
 // import css from '../css/Home.css'
 import Navbar from '../components/Navbar'
 import { useNavigate } from 'react-router-dom'
-export default function Home() {
+export default function Home({ isLogin, setIsLogin }) {
   const navigate = useNavigate()
   return (
     <>
-      <Navbar />
+      <Navbar isLogin={isLogin} setIsLogin={setIsLogin} />
       <div className="main">
         <section>
           <h3>Bring all your tasks,</h3>

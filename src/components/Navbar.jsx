@@ -1,8 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { MdLogout } from 'react-icons/md'
 // import style from '../css/Navbar.css'
 
-export default function Navbar() {
+export default function Navbar({ isLogin, setIsLogin }) {
+  const handleLogOut = () => {
+    localStorage.clear()
+    setIsLogin(false)
+  }
   return (
     <div className="navbar">
       <div className="nav_items1">
@@ -19,8 +24,17 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="nav_items_auth">
-        <Link to={'/login'}>Login</Link>
-        <Link to={'/register'}>Get Trello for free</Link>
+        {isLogin ? (
+          <Link onClick={handleLogOut}>
+            Log out{' '}
+            <MdLogout style={{ marginBottom: '-6px', fontSize: '1.5rem' }} />{' '}
+          </Link>
+        ) : (
+          <>
+            <Link to={'/login'}>Login</Link>
+            <Link to={'/register'}>Get Trello for free</Link>
+          </>
+        )}
       </div>
     </div>
   )

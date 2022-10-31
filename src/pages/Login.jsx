@@ -40,9 +40,10 @@ export default function Login({ setIsLogin }) {
     const data = new FormData(event.currentTarget)
     const email = data.get('email')
     const password = data.get('password')
-    if (userData.email === email && userData.password === password) {
+    if (data.get('password') === '' || data.get('email') === '') {
+      alert('please fill in the blanks')
+    } else if (userData.email === email && userData.password === password) {
       setIsLogin(true)
-
       navigate('/')
     } else {
       alert('email or password false')
