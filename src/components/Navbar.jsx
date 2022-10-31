@@ -5,7 +5,7 @@ import { MdLogout } from 'react-icons/md'
 
 export default function Navbar({ isLogin, setIsLogin }) {
   const handleLogOut = () => {
-    localStorage.clear()
+    // localStorage.clear()
     setIsLogin(false)
   }
   return (
