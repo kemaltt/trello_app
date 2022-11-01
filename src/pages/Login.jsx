@@ -51,8 +51,7 @@ export default function Login({ setIsLogin }) {
         })
         const userEmail = userInfo[0].email
         const userPassword = userInfo[0].password
-        console.log(userEmail)
-        console.log(userPassword)
+
         if (data.get('password') === '' || data.get('email') === '') {
           alert('please fill in the blanks')
         } else if (userEmail === email && userPassword === password) {

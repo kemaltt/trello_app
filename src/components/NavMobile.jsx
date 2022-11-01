@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { MdLogout } from 'react-icons/md'
 
 export default function NavMobile({ setIsLogin, isLogin }) {
   const [toggle, setToggle] = useState(false)
+  const navigate = useNavigate()
   const handleToggle = () => {
     setToggle(!toggle)
   }
   const handleLogOut = () => {
     // localStorage.clear()
+    navigate('/login')
     setIsLogin(false)
   }
   return (

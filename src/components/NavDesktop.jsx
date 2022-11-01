@@ -1,11 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { MdLogout } from 'react-icons/md'
 
 export default function NavDesktop({ setIsLogin, isLogin }) {
+  const navigate = useNavigate()
   const handleLogOut = () => {
     // localStorage.clear()
+
     setIsLogin(false)
+    navigate('/login')
   }
   return (
     <div className="nav_desktop">
