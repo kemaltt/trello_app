@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -34,8 +34,7 @@ function Copyright(props) {
 }
 
 const theme = createTheme()
-export default function Register() {
-  const [userData, setUserData] = useState([])
+export default function Register({ setUserData, userData }) {
   const navigate = useNavigate()
 
   const handleSubmit = (event) => {
@@ -44,20 +43,26 @@ export default function Register() {
     if (data.get('password') === '' || data.get('email') === '') {
       alert('please fill in the blanks')
     } else {
-      setUserData(...userData, {
-        name: data.get('firstName'),
-        lastName: data.get('lastName'),
-        email: data.get('email'),
-        password: data.get('password'),
-        isLogin: true,
-      })
+      setUserData([
+        ...userData,
+        {
+          name: data.get('firstName'),
+          lastName: data.get('lastName'),
+          email: data.get('email'),
+          password: data.get('password'),
+          isLogin: true,
+        },
+      ])
+
       setTimeout(() => {
         navigate('/login')
       }, 300)
     }
   }
+
   console.log(userData)
-  localStorage.setItem('userData', JSON.stringify(userData))
+
+  useEffect(() => {}, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -162,7 +167,11 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/login" variant="body2">
+                <Link
+                  style={{ textDecoration: 'none' }}
+                  to="/login"
+                  variant="body2"
+                >
                   Already have an account? Sign in
                 </Link>
               </Grid>

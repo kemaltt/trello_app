@@ -34,19 +34,36 @@ const theme = createTheme()
 
 export default function Login({ setIsLogin }) {
   const navigate = useNavigate()
+  const userData = JSON.parse(localStorage.getItem('userData'))
+  console.log(userData)
   const handleSubmit = (event) => {
     event.preventDefault()
-    const userData = JSON.parse(localStorage.getItem('userData'))
     const data = new FormData(event.currentTarget)
     const email = data.get('email')
     const password = data.get('password')
-    if (data.get('password') === '' || data.get('email') === '') {
+
+    if (email === '' || password === '') {
       alert('please fill in the blanks')
-    } else if (userData.email === email && userData.password === password) {
-      setIsLogin(true)
-      navigate('/')
     } else {
-      alert('email or password false')
+      if (userData.length > 0) {
+        const userInfo = userData.filter((el) => {
+          return el.email === email
+        })
+        const userEmail = userInfo[0].email
+        const userPassword = userInfo[0].password
+        console.log(userEmail)
+        console.log(userPassword)
+        if (data.get('password') === '' || data.get('email') === '') {
+          alert('please fill in the blanks')
+        } else if (userEmail === email && userPassword === password) {
+          setIsLogin(true)
+          navigate('/')
+        } else {
+          alert('email or password false')
+        }
+      } else {
+        alert('user not found please register')
+      }
     }
   }
 
@@ -125,12 +142,20 @@ export default function Login({ setIsLogin }) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link
+                  style={{ textDecoration: 'none' }}
+                  href="#"
+                  variant="body2"
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link to="/register" variant="body2">
+                <Link
+                  style={{ textDecoration: 'none' }}
+                  to="/register"
+                  variant="body2"
+                >
                   {'Sign up for an account'}
                 </Link>
               </Grid>

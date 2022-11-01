@@ -9,6 +9,9 @@ import { useState } from 'react';
 function App() {
 
   const [isLogin, setIsLogin] = useState(false)
+  const [userData, setUserData] = useState([])
+  localStorage.setItem('userData', JSON.stringify(userData))
+
 
   return (
     <div className="App">
@@ -16,7 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home isLogin={isLogin} setIsLogin={setIsLogin} />} />
           <Route path='/login' element={<Login setIsLogin={setIsLogin} />} />
-          <Route path='/register' element={<Register />} />
+          <Route path='/register' element={<Register setUserData={setUserData} userData={userData} />} />
         </Routes>
 
       </BrowserRouter>
