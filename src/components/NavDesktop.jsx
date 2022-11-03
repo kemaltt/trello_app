@@ -31,8 +31,7 @@ export default function NavDesktop({ setIsLogin, isLogin, setLoading }) {
       <div className="nav_items_auth">
         {isLogin ? (
           <Link onClick={handleLogOut}>
-            Log out{' '}
-            <MdLogout style={{ marginBottom: '-6px', fontSize: '1.5rem' }} />{' '}
+            Log out <MdLogout style={{ fontSize: '1.5rem' }} />{' '}
           </Link>
         ) : (
           <>
