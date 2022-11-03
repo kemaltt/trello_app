@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
+// import FormControlLabel from '@mui/material/FormControlLabel'
+// import Checkbox from '@mui/material/Checkbox'
 // import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
@@ -33,6 +33,7 @@ function Copyright(props) {
 const theme = createTheme()
 
 export default function Login({ setIsLogin }) {
+  const [message, setMessage] = useState('')
   const navigate = useNavigate()
   const userData = JSON.parse(localStorage.getItem('userData'))
   console.log(userData)
@@ -43,21 +44,36 @@ export default function Login({ setIsLogin }) {
     const password = data.get('password')
 
     if (email === '' || password === '') {
-      alert('please fill in the blanks')
+      setMessage(
+        <Box sx={{ mt: 3, color: 'red' }}>Please fill in the blanks!</Box>,
+      )
     } else {
       if (userData.length > 0) {
         const [userInfo] = userData
 
         if (password === '' || email === '') {
-          alert('please fill in the blanks')
+          setMessage(
+            <Box sx={{ mt: 3, color: 'red' }}>Please fill in the blanks!</Box>,
+          )
         } else if (userInfo.email === email && userInfo.password === password) {
           setIsLogin(true)
-          navigate('/')
+          setMessage(
+            <Box sx={{ mt: 3, color: 'green' }}>Entry successful!</Box>,
+          )
+          setTimeout(() => {
+            navigate('/')
+          }, 400)
         } else {
-          alert('email or password false')
+          setMessage(
+            <Box sx={{ mt: 3, color: 'red' }}>Email or Eassword false!</Box>,
+          )
         }
       } else {
-        alert('user not found please register')
+        setMessage(
+          <Box sx={{ mt: 3, color: 'red' }}>
+            User not found please register!
+          </Box>,
+        )
       }
     }
   }
@@ -123,10 +139,15 @@ export default function Login({ setIsLogin }) {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            <Grid item xs={12} sx={{ textAlign: 'center' }}>
+              {/* <FormControlLabel
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+                /> */}
+              {message}
+            </Grid>
             <Button
               type="submit"
               fullWidth

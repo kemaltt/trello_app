@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
+// import FormControlLabel from '@mui/material/FormControlLabel'
+// import Checkbox from '@mui/material/Checkbox'
 // import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
@@ -35,6 +35,7 @@ function Copyright(props) {
 
 const theme = createTheme()
 export default function RegisterFull({ setUserData, userData }) {
+  const [message, setMessage] = useState('')
   const navigate = useNavigate()
   const email = userData.email
   const handleSubmit = (event) => {
@@ -45,7 +46,9 @@ export default function RegisterFull({ setUserData, userData }) {
     const lastName = data.get('lastName')
 
     if (password === '' || firstName === '' || lastName === '') {
-      alert('please fill in the blanks')
+      setMessage(
+        <Box sx={{ mt: 3, color: 'red' }}>Please fill in the blanks!</Box>,
+      )
     } else {
       setUserData([
         {
@@ -56,10 +59,12 @@ export default function RegisterFull({ setUserData, userData }) {
           isLogin: true,
         },
       ])
-
+      setMessage(
+        <Box sx={{ mt: 3, color: 'green' }}>registration successful!</Box>,
+      )
       setTimeout(() => {
         navigate('/login')
-      }, 300)
+      }, 400)
     }
   }
 
@@ -154,13 +159,14 @@ export default function RegisterFull({ setUserData, userData }) {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
+              <Grid item xs={12} sx={{ textAlign: 'center' }}>
+                {/* <FormControlLabel
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
                   label="I want to receive inspiration, marketing promotions and updates via email."
-                />
+                /> */}
+                {message}
               </Grid>
             </Grid>
             <Button

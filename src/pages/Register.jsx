@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -36,6 +36,7 @@ function Copyright(props) {
 const theme = createTheme()
 export default function Register({ setUserData, userData }) {
   const navigate = useNavigate()
+  const [message, setMessage] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -50,9 +51,15 @@ export default function Register({ setUserData, userData }) {
     })
 
     if (email === '') {
-      alert('please fill in the blanks')
+      setMessage(
+        <Box sx={{ mt: 3, color: 'red' }}>please fill in the blanks!</Box>,
+      )
     } else if (userInfo.email === email) {
-      alert('this email address is registered please login')
+      setMessage(
+        <Box sx={{ mt: 3, color: 'red' }}>
+          This email address is registered please login!
+        </Box>,
+      )
     } else {
       setUserData({
         // firstName: firstName,
@@ -61,10 +68,10 @@ export default function Register({ setUserData, userData }) {
         // password: password,
         // isLogin: true,
       })
-
+      setMessage(<Box sx={{ mt: 3, color: 'green' }}>successful!</Box>)
       setTimeout(() => {
         navigate('/registerfull')
-      }, 300)
+      }, 400)
     }
   }
 
@@ -163,6 +170,10 @@ export default function Register({ setUserData, userData }) {
                 />
               </Grid> */}
             </Grid>
+            {message}
+            {/* <Typography sx={{ mt: 3 }} component="h3" variant="h6">
+        
+            </Typography> */}
             <Button
               type="submit"
               fullWidth
@@ -172,6 +183,7 @@ export default function Register({ setUserData, userData }) {
             >
               Continue
             </Button>
+
             <Grid container justifyContent="center">
               <Grid item>
                 <Link
