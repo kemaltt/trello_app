@@ -40,16 +40,15 @@ export default function Register({ setUserData, userData }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    const email = data.get('email').toLocaleLowerCase()
+    const email = data.get('email').toLocaleLowerCase().trim()
     // const password = data.get('password')
     // const firstName = data.get('firstName')
     // const lastName = data.get('lastName')
+    let userInfo
+    userData.forEach((el) => {
+      userInfo = el
+    })
 
-    // const userInfo = userData.filter((el) => {
-    //   return el.email === email
-    // })
-    // const userEmail = userInfo[0].email
-    const [userInfo] = userData
     if (email === '') {
       alert('please fill in the blanks')
     } else if (userInfo.email === email) {
