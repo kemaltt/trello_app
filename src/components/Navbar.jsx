@@ -4,11 +4,19 @@ import NavDesktop from './NavDesktop'
 import NavMobile from './NavMobile'
 // import style from '../css/Navbar.css'
 
-export default function Navbar({ isLogin, setIsLogin }) {
+export default function Navbar({ isLogin, setIsLogin, setLoading }) {
   return (
-    <div className="navbar">
-      <NavDesktop setIsLogin={setIsLogin} isLogin={isLogin} />
-      <NavMobile setIsLogin={setIsLogin} isLogin={isLogin} />
+    <div className="navbar_">
+      <NavDesktop
+        setIsLogin={setIsLogin}
+        isLogin={isLogin}
+        setLoading={setLoading}
+      />
+      <NavMobile
+        setIsLogin={setIsLogin}
+        isLogin={isLogin}
+        setLoading={setLoading}
+      />
     </div>
   )
 }

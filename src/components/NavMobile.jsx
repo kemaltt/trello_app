@@ -3,7 +3,7 @@ import { AiOutlineMenu } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import { MdLogout } from 'react-icons/md'
 
-export default function NavMobile({ setIsLogin, isLogin }) {
+export default function NavMobile({ setIsLogin, isLogin, setLoading }) {
   const [toggle, setToggle] = useState(false)
   const navigate = useNavigate()
   const handleToggle = () => {
@@ -11,6 +11,11 @@ export default function NavMobile({ setIsLogin, isLogin }) {
   }
   const handleLogOut = () => {
     // localStorage.clear()
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+    setLoading(true)
+    setToggle(!toggle)
     navigate('/login')
     setIsLogin(false)
   }

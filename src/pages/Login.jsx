@@ -32,7 +32,7 @@ function Copyright(props) {
 }
 const theme = createTheme()
 
-export default function Login({ setIsLogin }) {
+export default function Login({ setIsLogin, setLoading }) {
   const [message, setMessage] = useState('')
   const navigate = useNavigate()
   const userData = JSON.parse(localStorage.getItem('userData'))

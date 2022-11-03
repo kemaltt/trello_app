@@ -10,6 +10,7 @@ import RegisterFull from './pages/RegisterFull';
 function App() {
 
   const [isLogin, setIsLogin] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const [userData, setUserData] = useState([
     {
@@ -23,8 +24,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home isLogin={isLogin} setIsLogin={setIsLogin} />} />
-          <Route path='/login' element={<Login setIsLogin={setIsLogin} />} />
+          <Route path='/' element={<Home isLogin={isLogin} setIsLogin={setIsLogin} setLoading={setLoading} loading={loading} />} />
+          <Route path='/login' element={<Login setIsLogin={setIsLogin} setLoading={setLoading} />} />
           <Route path='/register' element={<Register setUserData={setUserData} userData={userData} />} />
           <Route path='/registerfull' element={<RegisterFull setUserData={setUserData} userData={userData} />} />
         </Routes>
