@@ -22,7 +22,7 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <a href="https://github.com/kemaltt" target="_blank">
+      <a href="https://github.com/kemaltt" target="_blank" rel="noreferrer">
         Kemal
       </a>{' '}
       {new Date().getFullYear()}
