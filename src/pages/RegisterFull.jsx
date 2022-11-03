@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -34,42 +34,38 @@ function Copyright(props) {
 }
 
 const theme = createTheme()
-export default function Register({ setUserData, userData }) {
+export default function RegisterFull({ setUserData, userData }) {
   const navigate = useNavigate()
-
+  const email = userData.email
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    const email = data.get('email').toLocaleLowerCase()
-    // const password = data.get('password')
-    // const firstName = data.get('firstName')
-    // const lastName = data.get('lastName')
+    const password = data.get('password')
+    const firstName = data.get('firstName')
+    const lastName = data.get('lastName')
 
-    // const userInfo = userData.filter((el) => {
-    //   return el.email === email
-    // })
-    // const userEmail = userInfo[0].email
-    const [userInfo] = userData
-    if (email === '') {
+    if (password === '' || firstName === '' || lastName === '') {
       alert('please fill in the blanks')
-    } else if (userInfo.email === email) {
-      alert('this email address is registered please login')
     } else {
-      setUserData({
-        // firstName: firstName,
-        // lastName: lastName,
-        email: email,
-        // password: password,
-        // isLogin: true,
-      })
+      setUserData([
+        {
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+          password: password,
+          isLogin: true,
+        },
+      ])
 
       setTimeout(() => {
-        navigate('/registerfull')
+        navigate('/login')
       }, 300)
     }
   }
 
   console.log(userData)
+
+  useEffect(() => {}, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -104,7 +100,7 @@ export default function Register({ setUserData, userData }) {
           {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar> */}
 
           <Typography component="h1" variant="h5">
-            Sign up for your account
+            Register a new account
           </Typography>
           <Box
             component="form"
@@ -113,7 +109,19 @@ export default function Register({ setUserData, userData }) {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  disabled
+                  //   label="Email Address"
+                  value={email}
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
@@ -123,8 +131,8 @@ export default function Register({ setUserData, userData }) {
                   label="First Name"
                   autoFocus
                 />
-              </Grid> */}
-              {/* <Grid item xs={12} sm={6}>
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -133,18 +141,9 @@ export default function Register({ setUserData, userData }) {
                   name="lastName"
                   autoComplete="family-name"
                 />
-              </Grid> */}
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
               </Grid>
-              {/* <Grid item xs={12}>
+
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -154,24 +153,23 @@ export default function Register({ setUserData, userData }) {
                   id="password"
                   autoComplete="new-password"
                 />
-              </Grid> */}
-              {/* <Grid item xs={12}>
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
-              </Grid> */}
+              </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              color="success"
               sx={{ mt: 3, mb: 2 }}
             >
-              Continue
+              Register
             </Button>
             <Grid container justifyContent="center">
               <Grid item>

@@ -22,9 +22,9 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
+      <a href="https://github.com/kemaltt" target="_blank">
+        Kemal
+      </a>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -46,15 +46,11 @@ export default function Login({ setIsLogin }) {
       alert('please fill in the blanks')
     } else {
       if (userData.length > 0) {
-        const userInfo = userData.filter((el) => {
-          return el.email === email
-        })
-        const userEmail = userInfo[0].email
-        const userPassword = userInfo[0].password
+        const [userInfo] = userData
 
-        if (data.get('password') === '' || data.get('email') === '') {
+        if (password === '' || email === '') {
           alert('please fill in the blanks')
-        } else if (userEmail === email && userPassword === password) {
+        } else if (userInfo.email === email && userInfo.password === password) {
           setIsLogin(true)
           navigate('/')
         } else {
