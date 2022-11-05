@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
-// import FormControlLabel from '@mui/material/FormControlLabel'
-// import Checkbox from '@mui/material/Checkbox'
-// import Link from '@mui/material/Link'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
@@ -24,9 +24,9 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <a href="https://github.com/kemaltt" target="_blank" rel="noreferrer">
-        Kemal
-      </a>{' '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -36,46 +36,45 @@ function Copyright(props) {
 const theme = createTheme()
 export default function Register({ setUserData, userData }) {
   const navigate = useNavigate()
-  const [message, setMessage] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    const email = data.get('email').toLocaleLowerCase().trim()
-    // const password = data.get('password')
-    // const firstName = data.get('firstName')
-    // const lastName = data.get('lastName')
-    let userInfo
-    userData.forEach((el) => {
-      userInfo = el
+    const email = data.get('email')
+    const password = data.get('password')
+    
+    const userInfo = userData.filter((el) => {
+      return el.email === email
     })
+    const userEmail = userInfo[0].email
+if(userEmail===email){
+  alert('there is an account with this email, please log in')
+}else{
+  if (password === '' || email === '') {
+    alert('please fill in the blanks')
+  } else {
+    setUserData([
+      ...userData,
+      {
+        name: data.get('firstName'),
+        lastName: data.get('lastName'),
+        email: data.get('email'),
+        password: data.get('password'),
+        isLogin: true,
+      },
+    ])
 
-    if (email === '') {
-      setMessage(
-        <Box sx={{ mt: 3, color: 'red' }}>please fill in the blanks!</Box>,
-      )
-    } else if (userInfo.email === email) {
-      setMessage(
-        <Box sx={{ mt: 3, color: 'red' }}>
-          This email address is registered please login!
-        </Box>,
-      )
-    } else {
-      setUserData({
-        // firstName: firstName,
-        // lastName: lastName,
-        email: email,
-        // password: password,
-        // isLogin: true,
-      })
-      setMessage(<Box sx={{ mt: 3, color: 'green' }}>successful!</Box>)
-      setTimeout(() => {
-        navigate('/registerfull')
-      }, 400)
-    }
+    setTimeout(() => {
+      navigate('/login')
+    }, 300)
+  }
+}
+ 
   }
 
   console.log(userData)
+
+  useEffect(() => {}, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -110,7 +109,7 @@ export default function Register({ setUserData, userData }) {
           {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar> */}
 
           <Typography component="h1" variant="h5">
-            Sign up for your account
+            Sign up
           </Typography>
           <Box
             component="form"
@@ -119,7 +118,7 @@ export default function Register({ setUserData, userData }) {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
@@ -129,8 +128,8 @@ export default function Register({ setUserData, userData }) {
                   label="First Name"
                   autoFocus
                 />
-              </Grid> */}
-              {/* <Grid item xs={12} sm={6}>
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -139,7 +138,7 @@ export default function Register({ setUserData, userData }) {
                   name="lastName"
                   autoComplete="family-name"
                 />
-              </Grid> */}
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -150,7 +149,7 @@ export default function Register({ setUserData, userData }) {
                   autoComplete="email"
                 />
               </Grid>
-              {/* <Grid item xs={12}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -160,31 +159,25 @@ export default function Register({ setUserData, userData }) {
                   id="password"
                   autoComplete="new-password"
                 />
-              </Grid> */}
-              {/* <Grid item xs={12}>
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
-              </Grid> */}
+              </Grid>
             </Grid>
-            {message}
-            {/* <Typography sx={{ mt: 3 }} component="h3" variant="h6">
-        
-            </Typography> */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              color="success"
               sx={{ mt: 3, mb: 2 }}
             >
-              Continue
+              Sign Up
             </Button>
-
-            <Grid container justifyContent="center">
+            <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link
                   style={{ textDecoration: 'none' }}
