@@ -24,7 +24,8 @@ export default function NavMobile({ setIsLogin, isLogin, setLoading }) {
       <div className="nav_mobile">
         <div className="logo">
           <img src="trello.png" alt="logo" />
-          <h2>Trello</h2>
+          <h2>T4US</h2>
+          <h2>TODO</h2>
         </div>
 
         {!toggle ? (

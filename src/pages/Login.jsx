@@ -13,23 +13,6 @@ import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate, Link } from 'react-router-dom'
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <a href="https://github.com/kemaltt" target="_blank" rel="noreferrer">
-        Kemal
-      </a>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  )
-}
 const theme = createTheme()
 
 export default function Login({ setIsLogin, setLoading }) {
@@ -84,42 +67,26 @@ export default function Login({ setIsLogin, setLoading }) {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 5,
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: 4,
-          }}
-        >
-          <img src="trello.png" alt="" />
-          <Typography component="h1" variant="h4">
-            Trello
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            marginTop: 5,
             display: 'flex',
             flexDirection: 'column',
+            textAlign: 'center',
             alignItems: 'center',
             borderRadius: '10px',
-            boxShadow: '1px 1px 5px 1px',
             padding: '1rem',
+            color: 'white',
           }}
         >
           {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar> */}
 
-          <Typography component="h1" variant="h5">
-            Sign in
+          <Typography sx={{ marginBottom: 3 }} component="h1" variant="h5">
+            Login
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} noValidate>
             <TextField
+              sx={{
+                background: 'white',
+                borderRadius: '5px',
+              }}
               margin="normal"
               required
               fullWidth
@@ -128,8 +95,10 @@ export default function Login({ setIsLogin, setLoading }) {
               name="email"
               autoComplete="email"
               autoFocus
+              color="warning"
             />
             <TextField
+              sx={{ background: 'white', borderRadius: '5px' }}
               margin="normal"
               required
               fullWidth
@@ -138,47 +107,39 @@ export default function Login({ setIsLogin, setLoading }) {
               type="password"
               id="password"
               autoComplete="current-password"
+              color="warning"
             />
-            <Grid item xs={12} sx={{ textAlign: 'center' }}>
-              {/* <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                /> */}
+            <Grid item xs={12} sx={{ mt: 1, mb: 1, textAlign: 'center' }}>
               {message}
             </Grid>
+            <Typography sx={{ textAlign: 'center', pt: 2 }} component="h1">
+              Forgot password?
+            </Typography>
             <Button
               type="submit"
-              fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              color="warning"
+              sx={{ mt: 2, mb: 2, pl: 5, pr: 5 }}
             >
-              Sign In
+              Login
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link
-                  style={{ textDecoration: 'none' }}
-                  href="#"
-                  variant="body2"
-                >
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link
-                  style={{ textDecoration: 'none' }}
-                  to="/register"
-                  variant="body2"
-                >
-                  {'Sign up for an account'}
-                </Link>
-              </Grid>
-            </Grid>
+            <Typography
+              sx={{ textAlign: 'center', borderTop: '1px solid white', pt: 2 }}
+              component="h1"
+            >
+              New Account
+            </Typography>
+
+            <Button
+              onClick={() => navigate('/register')}
+              variant="contained"
+              color="secondary"
+              sx={{ mt: 2, mb: 2, pl: 5, pr: 5 }}
+            >
+              Sing Up
+            </Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   )
