@@ -90,21 +90,22 @@ h2 {
 }
 
 .main img {
-  width: 60%;
+  width: 70%;
   height: 70vh;
   border-radius: 20px;
 }
 
 .privacy_policy,
 .about,
-.contact {
+.contact,
+.register {
   padding: 2vh 4%;
-
   text-align: center;
 }
 
 .privacy_policy .description,
-.about .description {
+.about .description,
+.contact .description {
   padding: 5vh 2%;
   background-color: rgba(236, 222, 222, 0.637);
   border-radius: 20px;
@@ -124,9 +125,12 @@ h2 {
   padding-left: 5%;
 }
 
+.footer {
+  padding: 2vh 4%;
+  text-align: left;
+}
 
 
-/* 
 @media (max-width: 768px) {
   .nav_desktop {
     display: none;
@@ -188,31 +192,18 @@ h2 {
     align-items: center;
     justify-content: space-between;
     height: auto;
-    padding: 5vh 0;
+    padding: 5vh 2%;
 
   }
 
-  .main section:nth-of-type(1) h3 {
-    font-size: 2rem;
+  .main img {
+    width: 50%;
+    height: 60vh;
+    border-radius: 20px;
   }
 
-  .main section:nth-of-type(1) p {
-    font-size: 1rem;
-    margin: 3vh 0;
-  }
 
-  .main_input {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 
-  .main .btn {
-    margin: 0;
-    color: rgb(190, 248, 190);
-
-  }
 
 }
 
@@ -225,19 +216,16 @@ h2 {
     padding: 4vh 0;
   }
 
-  section:nth-of-type(2) img {
-    width: 100%;
-
-  }
-
-  .main section:nth-of-type(1) {
-
+  .main img {
     width: 90%;
+    height: 70vh;
+    border-radius: 20px;
   }
 
-  .main .btn {
-    width: 100%;
-
+  .footer {
+    text-align: center;
+    padding: 2vh 4%;
   }
 
-} */
+
+}

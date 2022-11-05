@@ -62,85 +62,91 @@ export default function Login({ setIsLogin, setLoading }) {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            textAlign: 'center',
-            alignItems: 'center',
-            borderRadius: '10px',
-            padding: '1rem',
-            color: 'white',
-          }}
-        >
-          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar> */}
+    <div className="login">
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              textAlign: 'center',
+              alignItems: 'center',
+              borderRadius: '10px',
+              padding: '1rem',
+              color: 'white',
+            }}
+          >
+            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar> */}
 
-          <Typography sx={{ marginBottom: 3 }} component="h1" variant="h5">
-            Login
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate>
-            <TextField
-              sx={{
-                background: 'white',
-                borderRadius: '5px',
-              }}
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              color="warning"
-            />
-            <TextField
-              sx={{ background: 'white', borderRadius: '5px' }}
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              color="warning"
-            />
-            <Grid item xs={12} sx={{ mt: 1, mb: 1, textAlign: 'center' }}>
-              {message}
-            </Grid>
-            <Typography sx={{ textAlign: 'center', pt: 2 }} component="h1">
-              Forgot password?
-            </Typography>
-            <Button
-              type="submit"
-              variant="contained"
-              color="warning"
-              sx={{ mt: 2, mb: 2, pl: 5, pr: 5 }}
-            >
+            <Typography sx={{ marginBottom: 3 }} component="h1" variant="h5">
               Login
-            </Button>
-            <Typography
-              sx={{ textAlign: 'center', borderTop: '1px solid white', pt: 2 }}
-              component="h1"
-            >
-              New Account
             </Typography>
+            <Box component="form" onSubmit={handleSubmit} noValidate>
+              <TextField
+                sx={{
+                  background: 'white',
+                  borderRadius: '5px',
+                }}
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                // autoFocus
+                color="warning"
+              />
+              <TextField
+                sx={{ background: 'white', borderRadius: '5px' }}
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                color="warning"
+              />
+              <Grid item xs={12} sx={{ mt: 1, mb: 1, textAlign: 'center' }}>
+                {message}
+              </Grid>
+              <Typography sx={{ textAlign: 'center', pt: 2 }} component="h1">
+                Forgot password?
+              </Typography>
+              <Button
+                type="submit"
+                variant="contained"
+                color="warning"
+                sx={{ mt: 2, mb: 2, pl: 5, pr: 5 }}
+              >
+                Login
+              </Button>
+              <Typography
+                sx={{
+                  textAlign: 'center',
+                  borderTop: '1px solid white',
+                  pt: 2,
+                }}
+                component="h1"
+              >
+                New Account
+              </Typography>
 
-            <Button
-              onClick={() => navigate('/register')}
-              variant="contained"
-              color="secondary"
-              sx={{ mt: 2, mb: 2, pl: 5, pr: 5 }}
-            >
-              Sing Up
-            </Button>
+              <Button
+                onClick={() => navigate('/register')}
+                variant="contained"
+                color="secondary"
+                sx={{ mt: 2, mb: 2, pl: 5, pr: 5 }}
+              >
+                Sing Up
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+        </Container>
+      </ThemeProvider>
+    </div>
   )
 }

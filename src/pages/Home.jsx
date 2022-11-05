@@ -27,7 +27,7 @@ export default function Home({ isLogin, setIsLogin, loading, setLoading }) {
           <Login />
         </div>
       )}
-      <Copyright sx={{ padding: ' 2vh 4%' }} />
+      <Copyright className="footer" />
     </>
   )
 }
