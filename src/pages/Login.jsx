@@ -84,7 +84,6 @@ export default function Login({ setIsLogin, setLoading }) {
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate>
               <TextField
-    
                 margin="normal"
                 required
                 fullWidth
@@ -92,11 +91,10 @@ export default function Login({ setIsLogin, setLoading }) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                // autoFocus
-                // color="warning"
+                autoFocus
+                color="warning"
               />
               <TextField
-        
                 margin="normal"
                 required
                 fullWidth
@@ -105,7 +103,7 @@ export default function Login({ setIsLogin, setLoading }) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                // color="warning"
+                color="warning"
               />
               <Grid item xs={12} sx={{ mt: 1, mb: 1, textAlign: 'center' }}>
                 {message}

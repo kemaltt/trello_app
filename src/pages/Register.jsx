@@ -18,10 +18,10 @@ import NavPages from '../components/NavPages'
 
 const theme = createTheme()
 const isEmail = (email) =>
-/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
 
 const isPassword = (password) =>
-/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/i.test(password)
+  /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{8,16}$/i.test(password)
 
 export default function Register({ setUserData, userData }) {
   const navigate = useNavigate()
@@ -30,48 +30,41 @@ export default function Register({ setUserData, userData }) {
     event.preventDefault()
 
     const data = new FormData(event.currentTarget)
-    const userName=data.get("username")
+    const userName = data.get('username')
     const email = data.get('email')
     const password = data.get('password')
     const passwordConfirm = data.get('passwordconfirm')
 
-  
-
-//     const userInfo = userData.filter((el) => {
-//       return el.email === email
-//     })
-// const userEmail=userInfo[0].email
+    //     const userInfo = userData.filter((el) => {
+    //       return el.email === email
+    //     })
+    // const userEmail=userInfo[0].email
     // if (userEmail === email) {
     //   alert('there is an account with this email, please log in')
     // } else {
-      if (password === '' || passwordConfirm === '' || email === '') {
-        alert('please fill in the blanks')
-      }  else if(!isEmail(email)){
-        console.log(" Please enter a valid email address");
-              } 
-              
-              else if(!isPassword(password)){
-        console.log(" Please enter a valid password");
-      }
-      
-      else if(password !== passwordConfirm){
-console.log("password not match");
-      }  else  {
-        setUserData([
-   
-          {
-            userName:userName,
-            email: email,
-            password: password,
-            passwordConfirm:passwordConfirm,
-            isLogin: true,
-          },
-        ])
+    if (password === '' || passwordConfirm === '' || email === '') {
+      alert('please fill in the blanks')
+    } else if (!isEmail(email)) {
+      console.log(' Please enter a valid email address')
+    } else if (!isPassword(password)) {
+      console.log(' Please enter a valid password')
+    } else if (password !== passwordConfirm) {
+      console.log('password not match')
+    } else {
+      setUserData([
+        {
+          userName: userName,
+          email: email,
+          password: password,
+          passwordConfirm: passwordConfirm,
+          isLogin: true,
+        },
+      ])
 
-        setTimeout(() => {
-          navigate('/')
-        }, 300)
-      }
+      setTimeout(() => {
+        navigate('/')
+      }, 300)
+    }
     // }
   }
 
@@ -125,6 +118,7 @@ console.log("password not match");
                     id="username"
                     label="USERNAME"
                     autoFocus
+                    color="warning"
                   />
                 </Grid>
 
@@ -136,6 +130,7 @@ console.log("password not match");
                     label="EMAIL"
                     name="email"
                     autoComplete="email"
+                    color="warning"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -147,6 +142,7 @@ console.log("password not match");
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    color="warning"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -158,6 +154,7 @@ console.log("password not match");
                     type="password"
                     id="passwordconfirm"
                     autoComplete="new-password"
+                    color="warning"
                   />
                 </Grid>
               </Grid>

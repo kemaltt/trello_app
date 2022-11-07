@@ -18,7 +18,7 @@ function App() {
 
   const [userData, setUserData] = useState([
     {
-      email: 'test@gmail.com',
+
     }
   ])
   localStorage.setItem('userData', JSON.stringify(userData))
