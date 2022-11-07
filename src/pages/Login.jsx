@@ -39,12 +39,12 @@ export default function Login({ setIsLogin, setLoading }) {
             <Box sx={{ mt: 3, color: 'red' }}>Please fill in the blanks!</Box>,
           )
         } else if (userInfo.email === email && userInfo.password === password) {
-          setIsLogin(true)
+          // setIsLogin(true)
           setMessage(
             <Box sx={{ mt: 3, color: 'green' }}>Entry successful!</Box>,
           )
           setTimeout(() => {
-            navigate('/')
+            navigate('/about')
           }, 400)
         } else {
           setMessage(
@@ -84,10 +84,7 @@ export default function Login({ setIsLogin, setLoading }) {
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate>
               <TextField
-                sx={{
-                  background: 'white',
-                  borderRadius: '5px',
-                }}
+    
                 margin="normal"
                 required
                 fullWidth
@@ -96,10 +93,10 @@ export default function Login({ setIsLogin, setLoading }) {
                 name="email"
                 autoComplete="email"
                 // autoFocus
-                color="warning"
+                // color="warning"
               />
               <TextField
-                sx={{ background: 'white', borderRadius: '5px' }}
+        
                 margin="normal"
                 required
                 fullWidth
@@ -108,7 +105,7 @@ export default function Login({ setIsLogin, setLoading }) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                color="warning"
+                // color="warning"
               />
               <Grid item xs={12} sx={{ mt: 1, mb: 1, textAlign: 'center' }}>
                 {message}

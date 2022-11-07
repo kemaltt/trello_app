@@ -17,41 +17,62 @@ import { Link } from 'react-router-dom'
 import NavPages from '../components/NavPages'
 
 const theme = createTheme()
+const isEmail = (email) =>
+/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+
+const isPassword = (password) =>
+/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/i.test(password)
+
 export default function Register({ setUserData, userData }) {
   const navigate = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
     const data = new FormData(event.currentTarget)
+    const userName=data.get("username")
     const email = data.get('email')
     const password = data.get('password')
+    const passwordConfirm = data.get('passwordconfirm')
 
-    const userInfo = userData.filter((el) => {
-      return el.email === email
-    })
-    const userEmail = userInfo[0].email
-    if (userEmail === email) {
-      alert('there is an account with this email, please log in')
-    } else {
-      if (password === '' || email === '') {
+  
+
+//     const userInfo = userData.filter((el) => {
+//       return el.email === email
+//     })
+// const userEmail=userInfo[0].email
+    // if (userEmail === email) {
+    //   alert('there is an account with this email, please log in')
+    // } else {
+      if (password === '' || passwordConfirm === '' || email === '') {
         alert('please fill in the blanks')
-      } else {
+      }  else if(!isEmail(email)){
+        console.log(" Please enter a valid email address");
+              } 
+              
+              else if(!isPassword(password)){
+        console.log(" Please enter a valid password");
+      }
+      
+      else if(password !== passwordConfirm){
+console.log("password not match");
+      }  else  {
         setUserData([
-          ...userData,
+   
           {
-            name: data.get('firstName'),
-            lastName: data.get('lastName'),
-            email: data.get('email'),
-            password: data.get('password'),
+            userName:userName,
+            email: email,
+            password: password,
+            passwordConfirm:passwordConfirm,
             isLogin: true,
           },
         ])
 
         setTimeout(() => {
-          navigate('/login')
+          navigate('/')
         }, 300)
       }
-    }
+    // }
   }
 
   console.log(userData)
@@ -64,21 +85,7 @@ export default function Register({ setUserData, userData }) {
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
-          {/* <Box
-          sx={{
-            marginTop: 5,
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: 4,
-          }}
-        >
-          <img src="trello.png" alt="" />
-          <Typography component="h1" variant="h4">
-            Trello
-          </Typography>
-        </Box> */}
+
           <Box
             sx={{
               marginTop: 5,
@@ -112,10 +119,10 @@ export default function Register({ setUserData, userData }) {
                 <Grid item xs={12}>
                   <TextField
                     autoComplete="given-name"
-                    name="userName"
+                    name="username"
                     required
                     fullWidth
-                    id="userName"
+                    id="username"
                     label="USERNAME"
                     autoFocus
                   />
@@ -146,10 +153,10 @@ export default function Register({ setUserData, userData }) {
                   <TextField
                     required
                     fullWidth
-                    name="password"
+                    name="passwordconfirm"
                     label="CONFIRM PASSWORD"
                     type="password"
-                    id="password"
+                    id="passwordconfirm"
                     autoComplete="new-password"
                   />
                 </Grid>

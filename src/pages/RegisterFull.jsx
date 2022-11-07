@@ -15,23 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <a href="https://github.com/kemaltt" target="_blank " rel="noreferrer">
-        Kemal
-      </a>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  )
-}
+
 
 const theme = createTheme()
 export default function RegisterFull({ setUserData, userData }) {
@@ -41,6 +25,7 @@ export default function RegisterFull({ setUserData, userData }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
+    const userName=data.get("username")
     const password = data.get('password')
     const firstName = data.get('firstName')
     const lastName = data.get('lastName')
@@ -52,6 +37,7 @@ export default function RegisterFull({ setUserData, userData }) {
     } else {
       setUserData([
         {
+          userName:userName,
           email: email,
           firstName: firstName,
           lastName: lastName,
@@ -190,7 +176,7 @@ export default function RegisterFull({ setUserData, userData }) {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+ 
       </Container>
     </ThemeProvider>
   )
