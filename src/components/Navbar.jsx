@@ -2,7 +2,7 @@ import React from 'react'
 
 import NavDesktop from './NavDesktop'
 import NavMobile from './NavMobile'
-// import style from '../css/Navbar.css'
+// import '../css/Navbar.css'
 
 export default function Navbar({ isLogin, setIsLogin, setLoading }) {
   return (

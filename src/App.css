@@ -80,6 +80,23 @@ h2 {
   display: none;
 }
 
+.navbar_ a:hover {
+  color: orange;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  cursor: pointer;
+}
+
+.logo h4,
+h2 {
+  margin: 0;
+}
+
+
 .main {
   display: flex;
   align-items: center;

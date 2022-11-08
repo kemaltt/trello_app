@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import NavPages from '../components/NavPages'
 import { useForm } from 'react-hook-form'
+import UsernameGenerator from 'username-generator'
 
 const theme = createTheme()
 
@@ -32,19 +33,21 @@ export default function Register({ setUserData, userData }) {
     formState: { errors },
   } = useForm()
   const onSubmit = (inputRegister) => {
+    const randomUserName = UsernameGenerator.generateUsername('_')
+    console.log(randomUserName)
     console.log(inputRegister)
+
     if (userData[0].userName === inputRegister.userName) {
       setErrorUserName(<p>This name already exist</p>)
+    } else if (inputRegister.userName === '') {
+      inputRegister.userName = randomUserName
+    } else if (inputRegister.password !== inputRegister.passwordConfirm) {
+      setErrorPasswordConfirm(<p>Password not matched</p>)
     } else {
-      if (inputRegister.password !== inputRegister.passwordConfirm) {
-        setErrorPasswordConfirm(<p>Password not matched</p>)
-      } else {
-        setUserData([inputRegister])
-
-        setTimeout(() => {
-          navigate('/')
-        }, 300)
-      }
+      setUserData([inputRegister])
+      setTimeout(() => {
+        navigate('/')
+      }, 300)
     }
   }
 
