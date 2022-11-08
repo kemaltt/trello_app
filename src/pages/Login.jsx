@@ -46,40 +46,6 @@ export default function Login({ setIsLogin, setIsLoading }) {
       setMessage(<p style={{ color: 'red' }}>Email or Eassword false!</p>)
     }
   }
-  // const handleSubmit = (event) => {
-  //   event.preventDefault()
-  //   const data = new FormData(event.currentTarget)
-  //   const email = data.get('email')
-  //   const password = data.get('password')
-
-  //   if (email === '' || password === '') {
-  //     setMessage(
-  //       <p style={{ margin: '5px 0', color: 'red' }}>
-  //         Please fill in the blanks!
-  //       </p>,
-  //     )
-  //   } else {
-  //     if (userData.length > 0) {
-  //       const [userInfo] = userData
-
-  //       if (password === '' || email === '') {
-  //         setMessage(<p style={{ color: 'red' }}>Please fill in the blanks!</p>)
-  //       } else if (userInfo.email === email && userInfo.password === password) {
-  //         // setIsLogin(true)
-  //         setMessage(<p style={{ color: 'green' }}>Entry successful!</p>)
-  //         setTimeout(() => {
-  //           navigate('/about')
-  //         }, 400)
-  //       } else {
-  //         setMessage(<p style={{ color: 'red' }}>Email or Eassword false!</p>)
-  //       }
-  //     } else {
-  //       setMessage(
-  //         <p style={{ color: 'red' }}>User not found please register!</p>,
-  //       )
-  //     }
-  //   }
-  // }
 
   return (
     <div className="login">
@@ -122,8 +88,7 @@ export default function Login({ setIsLogin, setIsLoading }) {
                 {...register('email', {
                   required: true,
                   pattern: {
-                    value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: 'Please enter a valid email address',
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,15}$/i,
                   },
                 })}
               />
@@ -189,3 +154,38 @@ export default function Login({ setIsLogin, setIsLoading }) {
     </div>
   )
 }
+
+// const handleSubmit = (event) => {
+//   event.preventDefault()
+//   const data = new FormData(event.currentTarget)
+//   const email = data.get('email')
+//   const password = data.get('password')
+
+//   if (email === '' || password === '') {
+//     setMessage(
+//       <p style={{ margin: '5px 0', color: 'red' }}>
+//         Please fill in the blanks!
+//       </p>,
+//     )
+//   } else {
+//     if (userData.length > 0) {
+//       const [userInfo] = userData
+
+//       if (password === '' || email === '') {
+//         setMessage(<p style={{ color: 'red' }}>Please fill in the blanks!</p>)
+//       } else if (userInfo.email === email && userInfo.password === password) {
+//         // setIsLogin(true)
+//         setMessage(<p style={{ color: 'green' }}>Entry successful!</p>)
+//         setTimeout(() => {
+//           navigate('/about')
+//         }, 400)
+//       } else {
+//         setMessage(<p style={{ color: 'red' }}>Email or Eassword false!</p>)
+//       }
+//     } else {
+//       setMessage(
+//         <p style={{ color: 'red' }}>User not found please register!</p>,
+//       )
+//     }
+//   }
+// }
