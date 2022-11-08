@@ -90,9 +90,23 @@ h2 {
 }
 
 .main img {
-  width: 70%;
+  width: 67%;
   height: 70vh;
   border-radius: 20px;
+}
+
+.main .login {
+  width: 33%;
+}
+
+
+
+.register p,
+.login p {
+  color: tomato;
+  margin-bottom: 2px;
+  font-size: 14px;
+
 }
 
 .privacy_policy,
@@ -129,6 +143,7 @@ h2 {
   padding: 2vh 4%;
   text-align: left;
 }
+
 
 
 @media (max-width: 768px) {
@@ -202,6 +217,9 @@ h2 {
     border-radius: 20px;
   }
 
+  .main .login {
+    width: 50%;
+  }
 
 
 
@@ -218,8 +236,12 @@ h2 {
 
   .main img {
     width: 90%;
-    height: 70vh;
+    height: 50vh;
     border-radius: 20px;
+  }
+
+  .main .login {
+    width: 80%;
   }
 
   .footer {

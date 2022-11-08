@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -11,66 +11,42 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import NavPages from '../components/NavPages'
+import { useForm } from 'react-hook-form'
 
 const theme = createTheme()
-const isEmail = (email) =>
-  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
-
-const isPassword = (password) =>
-  /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{8,16}$/i.test(password)
 
 export default function Register({ setUserData, userData }) {
+  // const [errorEmail, setErrorEmail] = useState('')
+  // const [errorPassword, setErrorPassword] = useState('')
+  const [errorUserName, setErrorUserName] = useState('')
+  const [errorPasswordConfirm, setErrorPasswordConfirm] = useState('')
   const navigate = useNavigate()
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-
-    const data = new FormData(event.currentTarget)
-    const userName = data.get('username')
-    const email = data.get('email')
-    const password = data.get('password')
-    const passwordConfirm = data.get('passwordconfirm')
-
-    //     const userInfo = userData.filter((el) => {
-    //       return el.email === email
-    //     })
-    // const userEmail=userInfo[0].email
-    // if (userEmail === email) {
-    //   alert('there is an account with this email, please log in')
-    // } else {
-    if (password === '' || passwordConfirm === '' || email === '') {
-      alert('please fill in the blanks')
-    } else if (!isEmail(email)) {
-      console.log(' Please enter a valid email address')
-    } else if (!isPassword(password)) {
-      console.log(' Please enter a valid password')
-    } else if (password !== passwordConfirm) {
-      console.log('password not match')
-    } else {
-      setUserData([
-        {
-          userName: userName,
-          email: email,
-          password: password,
-          passwordConfirm: passwordConfirm,
-          isLogin: true,
-        },
-      ])
-
-      setTimeout(() => {
-        navigate('/')
-      }, 300)
-    }
-    // }
-  }
-
   console.log(userData)
 
-  useEffect(() => {}, [])
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+  const onSubmit = (inputRegister) => {
+    console.log(inputRegister)
+    if (userData[0].userName === inputRegister.userName) {
+      setErrorUserName(<p>This name already exist</p>)
+    } else {
+      if (inputRegister.password !== inputRegister.passwordConfirm) {
+        setErrorPasswordConfirm(<p>Password not matched</p>)
+      } else {
+        setUserData([inputRegister])
+
+        setTimeout(() => {
+          navigate('/')
+        }, 300)
+      }
+    }
+  }
 
   return (
     <div className="register">
@@ -81,18 +57,16 @@ export default function Register({ setUserData, userData }) {
 
           <Box
             sx={{
-              marginTop: 5,
+              marginTop: 3,
               display: 'flex',
               flexDirection: 'column',
             }}
           >
-            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar> */}
-
             <Typography sx={{ color: 'white' }} component="h1" variant="h5">
               Create new Account
             </Typography>
 
-            <Grid item sx={{ m: 3 }}>
+            <Grid item sx={{ m: 1 }}>
               <Link
                 style={{ textDecoration: 'none', color: 'white' }}
                 to="/"
@@ -105,24 +79,36 @@ export default function Register({ setUserData, userData }) {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
                 <Grid item xs={12}>
+                  {errors.userName && <p> Please enter a valid username </p>}
+                  {errorUserName}
                   <TextField
                     autoComplete="given-name"
-                    name="username"
+                    name="userName"
                     required
                     fullWidth
                     id="username"
                     label="USERNAME"
                     autoFocus
                     color="warning"
+                    {...register('userName', {
+                      required: false,
+                      minLength: 4,
+                      maxLength: 15,
+                      // pattern: {
+                      //   value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,15}$/,
+                      // },
+                    })}
                   />
                 </Grid>
 
                 <Grid item xs={12}>
+                  {errors.email && <p>Please enter a valid email address</p>}
+
                   <TextField
                     required
                     fullWidth
@@ -131,9 +117,18 @@ export default function Register({ setUserData, userData }) {
                     name="email"
                     autoComplete="email"
                     color="warning"
+                    {...register('email', {
+                      required: true,
+                      pattern: {
+                        value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message: 'Please enter a valid email address',
+                      },
+                    })}
                   />
                 </Grid>
                 <Grid item xs={12}>
+                  {errors.password && <p>Please enter a valid password</p>}
+
                   <TextField
                     required
                     fullWidth
@@ -143,18 +138,31 @@ export default function Register({ setUserData, userData }) {
                     id="password"
                     autoComplete="new-password"
                     color="warning"
+                    {...register('password', {
+                      required: true,
+                      pattern: {
+                        value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/,
+                      },
+                    })}
                   />
                 </Grid>
                 <Grid item xs={12}>
+                  {errorPasswordConfirm}
+                  {errors.passwordConfirm && (
+                    <p>Please enter a valid password</p>
+                  )}
                   <TextField
                     required
                     fullWidth
-                    name="passwordconfirm"
+                    name="passwordConfirm"
                     label="CONFIRM PASSWORD"
                     type="password"
                     id="passwordconfirm"
                     autoComplete="new-password"
                     color="warning"
+                    {...register('passwordConfirm', {
+                      required: true,
+                    })}
                   />
                 </Grid>
               </Grid>
@@ -174,3 +182,58 @@ export default function Register({ setUserData, userData }) {
     </div>
   )
 }
+
+// const isEmail = (email) =>
+// /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+
+// const isPassword = (password) =>
+// /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{8,16}$/i.test(password)
+
+// const handleSubmit = (event) => {
+//   event.preventDefault()
+
+//   const data = new FormData(event.currentTarget)
+//   const userName = data.get('username')
+//   const email = data.get('email')
+//   const password = data.get('password')
+//   const passwordConfirm = data.get('passwordconfirm')
+
+//   //     const userInfo = userData.filter((el) => {
+//   //       return el.email === email
+//   //     })
+//   // const userEmail=userInfo[0].email
+//   // if (userEmail === email) {
+//   //   alert('there is an account with this email, please log in')
+//   // } else {
+//   if (password === '' || passwordConfirm === '' || email === '') {
+//     alert('please fill in the blanks')
+//   } else if (!isEmail(email)) {
+//     setErrorEmail('Please enter a valid email address')
+//     console.log(' Please enter a valid email address')
+//   } else if (!isPassword(password)) {
+//     setErrorPassword('Please enter a valid password')
+//     console.log(' Please enter a valid password')
+//   } else if (password !== passwordConfirm) {
+//     setErrorPasswordConfirm('password not match')
+//     console.log('Password not matched')
+//   } else {
+//     setUserData([
+//       {
+//         userName: userName,
+//         email: email,
+//         password: password,
+//         passwordConfirm: passwordConfirm,
+//         isLogin: true,
+//       },
+//     ])
+
+//     setTimeout(() => {
+//       navigate('/')
+//     }, 300)
+//   }
+//   // }
+// }
+
+// console.log(userData)
+
+// useEffect(() => {}, [])

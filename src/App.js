@@ -14,11 +14,14 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 function App() {
 
   const [isLogin, setIsLogin] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const [userData, setUserData] = useState([
     {
-
+      userName: '',
+      email: '',
+      password: '',
+      passwordConfirm: ''
     }
   ])
   localStorage.setItem('userData', JSON.stringify(userData))
@@ -28,11 +31,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home isLogin={isLogin} setIsLogin={setIsLogin} setLoading={setLoading} loading={loading} />} />
+          <Route path='/' element={<Home isLogin={isLogin} setIsLogin={setIsLogin} setIsLoading={setIsLoading} isLoading={isLoading} />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/privacy' element={<PrivacyPolicy />} />
-          <Route path='/login' element={<Login setIsLogin={setIsLogin} setLoading={setLoading} />} />
+          <Route path='/login' element={<Login setIsLogin={setIsLogin} setIsLoading={setIsLoading} />} />
           <Route path='/register' element={<Register setUserData={setUserData} userData={userData} />} />
           <Route path='/registerfull' element={<RegisterFull setUserData={setUserData} userData={userData} />} />
         </Routes>

@@ -15,8 +15,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-
-
 const theme = createTheme()
 export default function RegisterFull({ setUserData, userData }) {
   const [message, setMessage] = useState('')
@@ -25,7 +23,7 @@ export default function RegisterFull({ setUserData, userData }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    const userName=data.get("username")
+    const userName = data.get('username')
     const password = data.get('password')
     const firstName = data.get('firstName')
     const lastName = data.get('lastName')
@@ -37,7 +35,7 @@ export default function RegisterFull({ setUserData, userData }) {
     } else {
       setUserData([
         {
-          userName:userName,
+          userName: userName,
           email: email,
           firstName: firstName,
           lastName: lastName,
@@ -69,7 +67,7 @@ export default function RegisterFull({ setUserData, userData }) {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: 4,
+            marginbottom: 4,
           }}
         >
           <img src="trello.png" alt="" />
@@ -176,7 +174,6 @@ export default function RegisterFull({ setUserData, userData }) {
             </Grid>
           </Box>
         </Box>
- 
       </Container>
     </ThemeProvider>
   )
